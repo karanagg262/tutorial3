@@ -1,0 +1,42 @@
+<section class="form">
+  <h1>Profile Registration</h1>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm)">
+  
+      <label>First Name: </label>
+      <input formControlName="firstName">
+      <p style="color:red" *ngIf= "firstNameError">
+        {{firstNameError}}
+      </p>
+      <br><br>
+  
+      <label>Last Name: </label>
+      <input formControlName="lastName">
+      <p style="color:red" *ngIf= "lastNameError">
+        {{lastNameError}}
+      </p>
+      <br><br>
+  
+      <label>E-Mail: </label>
+      <input formControlName="email">  
+      <p style="color:red" *ngIf= "emailError">
+        {{emailError}}
+      </p>
+      <br><br>
+  
+      <label>Password: </label>
+      <input type="password" formControlName="password">
+      <p style="color:red" *ngIf= "passwordError">
+        {{passwordError}}
+      </p>
+      <br><br>
+  
+      <label>Confirm Password: </label>
+      <input type="password" formControlName="confirmpassword"> 
+      <p style="color:red" *ngIf= "confirmpasswordError">
+        {{confirmpasswordError}}
+      </p>
+      <br><br>
+  
+      <input type="submit">
+    </form>
+  </section>
