@@ -3,14 +3,14 @@
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(registrationForm)">
   
       <label>First Name: </label>
-      <input formControlName="firstName">
+      <input formControlName="firstName" (keypress)="nameKeyPress($event)">
       <p style="color:red" *ngIf= "firstNameError">
         {{firstNameError}}
       </p>
       <br><br>
   
       <label>Last Name: </label>
-      <input formControlName="lastName">
+      <input formControlName="lastName" (keypress)="nameKeyPress($event)">
       <p style="color:red" *ngIf= "lastNameError">
         {{lastNameError}}
       </p>

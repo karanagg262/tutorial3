@@ -26,8 +26,8 @@ export class RegistrationComponent implements OnInit {
       firstName: new FormControl("",[Validators.required]),
       lastName: new FormControl("",[Validators.required]),
       email: new FormControl("",[Validators.required, Validators.email]),
-      password: new FormControl("",[Validators.required, Validators.minLength(6)]),
-      confirmpassword: new FormControl("",[Validators.required, Validators.minLength(6)])
+      password: new FormControl("",[Validators.required, Validators.minLength(8)]),
+      confirmpassword: new FormControl("",[Validators.required, Validators.minLength(8)])
     })
   }
   onSubmit(registrationForm: FormGroup){
@@ -43,13 +43,22 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  nameKeyPress(event: KeyboardEvent){
+    if(!((event.keyCode >= 65 && event.keyCode <= 90) || (event.keyCode >= 97 && event.keyCode <= 122))){
+      event.preventDefault();
+    }
+  }
   checkPassword(){
     if(this.registrationForm.value.password != this.registrationForm.value.confirmpassword){
       this.passwordError = "Password should match."
       this.confirmpasswordError = "Password should match."
       return false;
     }
-    return true;
+    if(!/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*]/.test(this.registrationForm.value.password)){
+      this.passwordError = "Password should be alphanumeric and should contain special characters`."
+      return false;
+    }
+     return true;
   }
 
   checkControls(){
@@ -77,7 +86,7 @@ export class RegistrationComponent implements OnInit {
         flag = true;
       }
       if(this.registrationForm.controls['password'].errors?.['minlength']){
-        this.passwordError = "Password Length should be minimum 6 char long."
+        this.passwordError = "Password Length should be minimum 8 char long."
         flag = true;
       }
       if(this.registrationForm.controls['confirmpassword'].errors?.['required']){
@@ -85,7 +94,7 @@ export class RegistrationComponent implements OnInit {
         flag = true;
       }
       if(this.registrationForm.controls['confirmpassword'].errors?.['minlength']){
-        this.confirmpasswordError = "Password Length should be minimum 6 char long."
+        this.confirmpasswordError = "Password Length should be minimum 8 char long."
         flag = true;
       }
     }
